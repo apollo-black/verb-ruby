@@ -24,7 +24,7 @@ module Verb
   private
 
   class Message
-    API_URL = ENV['VERB_API'] || ''https://verb.sh/api/v1/message'
+    API_URL = ENV['VERB_API'] || 'https://verb.sh/api/v1/message'
 
     attr_reader :context
     attr_reader :files
@@ -42,7 +42,7 @@ module Verb
     # Attach files to the message
     def attach(files)
       if @context[:type] != :email
-        raise "This message type cannot have file attachments"
+        raise 'This message type cannot have file attachments'
       end
 
       parsed_files(files).each do |f|
