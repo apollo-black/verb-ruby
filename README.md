@@ -1,6 +1,6 @@
-# Verb Ruby Client
+# verb.sh [Ruby Client]
 
-The official Ruby Client for the [Verb](https://verb.sh) messaging web service.
+The official Ruby Client for the [Verb](https://verb.sh) messaging platform.
 
 ## Installation
 
@@ -10,13 +10,15 @@ gem install verb-sh
 
 #### Requirements
 
-- **[Ruby 2.4.1](https://www.ruby-lang.org/)**
+- *[Ruby 2.3.0+](https://www.ruby-lang.org/)*
 
 ###Configuration
 
 ```ruby
-Verb.configure(token: '<token>')
+Verb.configure(token: '<API Key>')
 ```
+
+The API is non-blocking so you can simply send and forget. The processing happens in the background on a highly efficient queue system.
 
 ### Sending Email Messages
 
@@ -57,41 +59,15 @@ Files can only be attached to email messages (this is also dependent on the serv
 
 These file types are generally not allowed and will be blocked.
 
-- vbs
-- exe
-- bin
-- bat
-- chm
-- com
-- cpl
-- crt
-- hlp
-- hta
-- inf
-- ins
-- isp
-- jse
-- lnk
-- mdb
-- pcd
-- pif
-- reg
-- scr
-- sct
-- shs
-- vbe
-- vba
-- wsf
-- wsh
-- wsl
-- msc
-- msi
-- msp
-- mst
+vbs, exe, bin, bat, chm, com, cpl,
+crt, hlp, hta, inf, ins, isp, jse,
+lnk, mdb, pcd, pif, reg, scr, sct,
+shs, vbe, vba, wsf, wsh, wsl, msc,
+msi, msp, mst
 
 #### Scheduling Messages
 
-Verb has a built-in scheduler on the server that allows you schedule emails in the future. These are quite useful in the sense that you can target future user behavior or events.
+Verb has a built-in scheduler that allows you schedule emails in the future. These are quite useful in the sense that you can target future user behavior or events.
 
 ```ruby
 @message = Verb.email({
@@ -101,6 +77,21 @@ Verb has a built-in scheduler on the server that allows you schedule emails in t
 @message.send(in: '1h')
 ```
 
+Schedule Examples:
+
+- `'1h'    # 1 hour`
+- `'1h20m' # 1 hour 20 minutes`
+- `'3Y2W'  # 3 years 2 weeks`
+
+Available Tokens:
+
+- 's' seconds
+- 'h' hours
+- 'm' minutes
+- 'D' days
+- 'M' months
+- 'W' weeks
+- 'Y' years
 
 ### Sending SMS Messages
 
@@ -112,12 +103,11 @@ Verb has a built-in scheduler on the server that allows you schedule emails in t
 @message.send(in: '1h')
 ```
 
-
 ### Re-usable Templates
 
 Templates are a powerful way to add reusable message (sms / email) templates on the server side where you can edit content without requiring direct access to source code or perform re-deployments.
 
-Templates are available for:
+Templates are available for all message types:
 
 - Email Messages
 - SMS Messages
@@ -129,6 +119,7 @@ Templates are available for:
 
 @message.send(in: '20m')
 ```
+
 Templates are created in the [Verb](https://verb.sh) admin dashboard using Text, HTML or [mustache](https://mustache.github.io/). If your template contains variables, you can specify these by adding a `data: {}` field into the parameters.
 
 
