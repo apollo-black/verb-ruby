@@ -30,7 +30,7 @@ msg = Verb.email({
 msg.send
 ```
 
-#### Attaching Files
+### Attaching Files
 
 Files can only be attached to email messages (this is also dependent on the service you are using to send the emails). Only pass the path to the file.
 
@@ -55,7 +55,7 @@ msg.send
 
 ```
 
-#### Restricted File Types:
+### Restricted File Types:
 
 These file types are generally not allowed and will be blocked.
 
@@ -65,7 +65,7 @@ lnk, mdb, pcd, pif, reg, scr, sct,
 shs, vbe, vba, wsf, wsh, wsl, msc,
 msi, msp, mst
 
-#### Scheduling Messages
+### Scheduling Messages
 
 Verb has a built-in scheduler that allows you schedule emails in the future. These are quite useful in the sense that you can target future user behavior or events.
 
@@ -151,7 +151,7 @@ To test the current stable version of verb-sh, simply run:
 
 #### License
 
-Please see [LICENSE](https://github.com/Craaft/verb-ruby/blob/master/LICENSE) for licensing details.
+Please see [LICENSE](https://github.com/apollo-black/verb-ruby/blob/master/LICENSE) for licensing details.
 
 #### Author
 
