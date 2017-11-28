@@ -12,7 +12,7 @@ gem install verb-sh
 
 - *[Ruby 2.3.0+](https://www.ruby-lang.org/)*
 
-###Configuration
+### Configuration
 
 ```ruby
 Verb.configure(token: '<API Key>')
