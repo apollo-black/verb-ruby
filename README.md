@@ -69,7 +69,7 @@ msi, msp, mst
 
 ### Scheduling Messages
 
-Verb has a built-in scheduler that allows you schedule emails in the future. These are quite useful in the sense that you can target future user behavior or events.
+Verb has a built-in scheduler that allows you schedule messages to be delivered in the future. These are quite useful in the sense that you can target future user behavior or events.
 
 ```ruby
 msg = Verb.email({
@@ -78,6 +78,8 @@ msg = Verb.email({
 
 msg.send(in: '1h')
 ```
+
+There is no limit to how far in the future a message can be scheduled for. 
 
 Schedule Examples:
 
