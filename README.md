@@ -59,11 +59,13 @@ msg.send
 
 These file types are generally not allowed and will be blocked.
 
+```
 vbs, exe, bin, bat, chm, com, cpl,
 crt, hlp, hta, inf, ins, isp, jse,
 lnk, mdb, pcd, pif, reg, scr, sct,
 shs, vbe, vba, wsf, wsh, wsl, msc,
 msi, msp, mst
+```
 
 ### Scheduling Messages
 
