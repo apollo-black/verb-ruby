@@ -5,7 +5,7 @@ The official Ruby Client for the [Verb](https://verb.sh) messaging platform.
 ## Installation
 
 ```sh
-gem install verb-sh
+gem install verb-rb
 ```
 
 #### Requirements
@@ -15,7 +15,7 @@ gem install verb-sh
 ### Configuration
 
 ```ruby
-Verb.configure(token: '<API Key>')
+Verb.configure(token: '<Project API Key>')
 ```
 
 The API is non-blocking so you can simply send and forget. The processing happens in the background on a highly efficient queue system.
@@ -83,7 +83,7 @@ Schedule Examples:
 - `'1h20m' # 1 hour 20 minutes`
 - `'3Y2W'  # 3 years 2 weeks`
 
-Available Tokens:
+Available Date Tokens:
 
 - 's' seconds
 - 'h' hours
@@ -105,12 +105,14 @@ msg.send(in: '1h')
 
 ### Re-usable Templates
 
-Templates are a powerful way to add reusable message (sms / email) templates on the server side where you can edit content without requiring direct access to source code or perform re-deployments.
+Templates are a powerful way to add reusable message (SMS / Email) templates on the server side where you can edit content without requiring direct access to source code or perform re-deployments.
 
-Templates are available for all message types:
+Templates are available for the following message types:
 
 - Email Messages
 - SMS Messages
+
+Example: 
 
 ```ruby
 msg = Verb.sms({
@@ -120,18 +122,7 @@ msg = Verb.sms({
 msg.send(in: '20m')
 ```
 
-Templates are created in the [Verb](https://verb.sh) admin dashboard using Text, HTML or [mustache](https://mustache.github.io/). If your template contains variables, you can specify these by adding a `data: {}` field into the parameters.
-
-
-### Using Lists
-
-With Verb, lists are really easy to create or add to. It's as simple and similar to using a tag with similar mechanics in the backend. You simply add `list: '<list-name>'` to your method params.
-
-```ruby
-msg = Verb.sms({
-  template: 'welcome-sms-template', to: '+20830000000', list: 'list-slug', data: { name: 'My Name', other: 'More data' }
-})
-```
+Templates are created in the [Verb](https://verb.sh) admin dashboard using Text, HTML or [Mustache](https://mustache.github.io/). If your template contains variables, you can specify these by adding a `data: {}` field into the parameters list.
 
 ### Other API/SDK Methods
 

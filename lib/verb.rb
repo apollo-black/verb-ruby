@@ -5,43 +5,52 @@ require 'uri'
 require 'rest_client'
 
 module Verb
-  def self.configure(api_key = nil)
-    tokens = api_key.split('-')
+  def self.configure(api_key = nil, debug = false)
+    pieces = api_key.split('-')
 
-    raise ArgumentError, 'API Token is invalid' if tokens.count != 3
+    raise ArgumentError, 'The provided API Token is invalid' if pieces.count != 2
 
     @api_key = api_key
+    @debug = debug
   end
 
   def self.email(params = {})
-    Email.new(@api_key, params)
+    Email.new(@api_key, params, @debug)
   end
 
   def self.sms(params = {})
-    SMS.new(@api_key, params)
+    SMS.new(@api_key, params, @debug)
   end
 
   private
 
   class Message
-    API_URL = ENV['VERB_API'] || 'https://verb.sh/api/v1/message'
+    API_URL = ENV['VERB_API'] || 'http://localhost:3000/api/v1/message'
 
     attr_reader :context
     attr_reader :files
 
-    def initialize(params = {})
+    def initialize(params = {}, debug = false)
       @context = {}
       @files = []
       @context[:tags] = []
+      @debug = debug
+      @api_key = nil
 
       params.each do |k, v|
-        @context[k] = v
+        if k != :api_key
+          @context[k] = v
+        else 
+          @context[:pid] = v.split('-').last # We add the project ID to the ctx
+
+          @api_key = v.split('-').first
+        end
       end
     end
 
-    # Attach files to the message
+    # Attach files to the message (if possible)
     def attach(files)
-      if @context[:type] != :email
+      if @context[:type] == :sms
         raise 'This message type cannot have file attachments'
       end
 
@@ -76,19 +85,18 @@ module Verb
         payload[:files] << File.open(f)
       end
 
-      @response = post(payload)
-    end
+      log(payload)
 
-    private
-
-    # @TODO: Improve error response handling and feedback
-    def post(payload = {})
       begin
-        RestClient.post API_URL, payload
+        RestClient.post API_URL, payload, {
+          'x-api-key': @api_key
+        }
       rescue RestClient::ExceptionWithResponse => e
         e.response
       end
     end
+
+    private
 
     # Parse the files and return an array of files that exist
     def parsed_files(files)
@@ -121,23 +129,31 @@ module Verb
 
       buffer
     end
+
+    # Perform the message logging
+    def log(s)
+      if @debug
+        require 'logger'
+        Logger.new(STDOUT).debug(s)
+      end
+    end
   end
 
   public
 
   class Email < Message
-    def initialize(api_key, params = {})
+    def initialize(api_key, params = {}, debug = false)
       params[:api_key] = api_key
       params[:type] = :email
-      super(params)
+      super(params, debug)
     end
   end
 
   class SMS < Message
-    def initialize(api_key, params = {})
+    def initialize(api_key, params = {}, debug = false)
       params[:api_key] = api_key
       params[:type] = :sms
-      super(params)
+      super(params, debug)
     end
   end
 end

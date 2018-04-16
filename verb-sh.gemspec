@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = 'verb-sh'
+  s.name        = 'verb-rb'
   s.version     = '0.0.1'
   s.date        = Time.now.strftime('%Y-%m-%e').to_s
   s.summary     = ''
