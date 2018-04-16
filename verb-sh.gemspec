@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'verb-rb'
-  s.version     = '0.0.1'
+  s.version     = '1.0.0'
   s.date        = Time.now.strftime('%Y-%m-%e').to_s
   s.summary     = ''
   s.description = ''
@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.email       = 'hi@verb.sh'
   s.files       = `git ls-files -z`.split("\x0")
   s.license     = 'MIT'
-  s.homepage    = 'https://github.com/Craaft/verb-ruby'
+  s.homepage    = 'https://github.com/apollo-black/verb-ruby'
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'minitest', '~> 5.7', '>= 5.7.0'

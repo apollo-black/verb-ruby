@@ -25,7 +25,7 @@ module Verb
   private
 
   class Message
-    API_URL = ENV['VERB_API'] || 'http://localhost:3000/api/v1/message'
+    API_URL = ENV['VERB_API'] || 'https://verb.sh/api/v1/message'
 
     attr_reader :context
     attr_reader :files
