@@ -24,7 +24,7 @@ The API is non-blocking so you can simply send and forget. The processing happen
 
 ```ruby
 msg = Verb.email({
-  to: 'me@me.com', text: 'Email Text', html: 'Email HTML'
+  to: 'me@me.com', text: 'Email Text', html: 'Email HTML', subject: 'Testing!'
 })
 
 msg.send
@@ -36,7 +36,7 @@ Files can only be attached to email messages (this is also dependent on the serv
 
 ```ruby
 msg = Verb.email({
-  to: 'me@me.com', text: 'Email Text', html: 'Email HTML'
+  to: 'me@me.com', text: 'Email Text', html: 'Email HTML', subject: 'Testing!'
 })
 
 msg.attach('file.pdf')
@@ -73,7 +73,7 @@ Verb has a built-in scheduler that allows you schedule messages to be delivered 
 
 ```ruby
 msg = Verb.email({
-  to: 'me@me.com', text: 'Email Text', html: 'Email HTML'
+  to: 'me@me.com', text: 'Email Text', html: 'Email HTML', subject: 'Testing!'
 })
 
 msg.send(in: '1h')
