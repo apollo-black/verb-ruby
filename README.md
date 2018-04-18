@@ -23,11 +23,11 @@ The API is non-blocking so you can simply send and forget. The processing happen
 ### Sending Email Messages
 
 ```ruby
-msg = Verb.email({
+message = Verb.email({
   to: 'me@me.com', text: 'Email Text', html: 'Email HTML', subject: 'Testing!'
 })
 
-msg.send
+message.send
 ```
 
 ### Attaching Files
@@ -35,23 +35,23 @@ msg.send
 Files can only be attached to email messages (this is also dependent on the service you are using to send the emails). Only pass the path to the file.
 
 ```ruby
-msg = Verb.email({
+message = Verb.email({
   to: 'me@me.com', text: 'Email Text', html: 'Email HTML', subject: 'Testing!'
 })
 
-msg.attach('file.pdf')
+message.attach('file.pdf')
 
 # OR
 
-msg.attach(['file1.pdf', 'file2.pdf'])
+message.attach(['file1.pdf', 'file2.pdf'])
 
 # OR
 
-msg.attach('file1.pdf')
-msg.attach('file2.pdf')
-msg.attach('file3.pdf')
+message.attach('file1.pdf')
+message.attach('file2.pdf')
+message.attach('file3.pdf')
 
-msg.send
+message.send
 
 ```
 
@@ -72,11 +72,11 @@ msi, msp, mst
 Verb has a built-in scheduler that allows you schedule messages to be delivered in the future. These are quite useful in the sense that you can target future user behavior or events.
 
 ```ruby
-msg = Verb.email({
+message = Verb.email({
   to: 'me@me.com', text: 'Email Text', html: 'Email HTML', subject: 'Testing!'
 })
 
-msg.send(in: '1h')
+message.send(in: '1h')
 ```
 
 There is no limit to how far in the future a message can be scheduled for. 
@@ -100,11 +100,11 @@ Available Date Tokens:
 ### Sending SMS Messages
 
 ```ruby
-msg = Verb.sms({
+message = Verb.sms({
   to: '+20830000000', text: 'SMS Text'
 })
 
-msg.send(in: '1h')
+message.send(in: '1h')
 ```
 
 ### Re-usable Templates
@@ -119,11 +119,11 @@ Templates are available for the following message types:
 Example: 
 
 ```ruby
-msg = Verb.sms({
+message = Verb.sms({
   template: 'welcome-sms-template', to: '+20830000000', data: { name: 'My Name', other: 'More data' }
 })
 
-msg.send(in: '20m')
+message.send(in: '20m')
 ```
 
 Templates are created in the [Verb](https://verb.sh) admin dashboard using Text, HTML or [Mustache](https://mustache.github.io/). If your template contains variables, you can specify these by adding a `data: {}` field into the parameters list.
@@ -133,9 +133,9 @@ Templates are created in the [Verb](https://verb.sh) admin dashboard using Text,
 The SDK has purposely been kept simple to use in attempt to keep code as minimal as possible. There are however two additional methods that can be used to determine if messages were sent successfully.
 
 ```ruby
-puts msg.status  # Integer, the response code from the API
-puts msg.sent?   # Boolean, based on if the message was sent or not
-puts msg.error   # Hash, contains all the error details from the API if a message was not delivered
+puts message.status  # Integer, the response code from the API
+puts message.sent?   # Boolean, based on if the message was sent or not
+puts message.error   # Hash, contains all the error details from the API if a message was not delivered
 ```
 
 #### Running the tests
