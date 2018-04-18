@@ -15,6 +15,8 @@ gem install verb-rb
 ### Configuration
 
 ```ruby
+require 'verb'
+
 Verb.configure(token: '<Project API Key>')
 ```
 
